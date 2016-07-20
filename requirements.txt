@@ -1,0 +1,7 @@
+elasticsearch
+pika
+python-dateutil
+six
+toml
+urllib3
+wsgiref

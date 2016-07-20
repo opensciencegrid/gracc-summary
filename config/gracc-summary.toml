@@ -1,0 +1,21 @@
+[AMQP]
+
+
+# Host information
+host = "amqp.example.com"
+vhost = "vhost"
+
+# Username and password for the AMQP router
+username = "amqpusername"
+password = "amqppassword"
+
+# What exchange and queue to create to listen on
+listen_exchange = "gracc.osg.summary"
+listen_queue = "gracc.osg.summary"
+
+
+[PeriodicSummarizer]
+
+destination_exchange = "gracc.osg.summary"
+destination_key = "gracc.osg.summary"
+
