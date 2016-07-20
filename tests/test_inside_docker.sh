@@ -11,6 +11,7 @@ rpm -Uvh https://download.elastic.co/elasticsearch/release/org/elasticsearch/dis
 
 systemctl start elasticsearch.service
 systemctl start rabbitmq-server.service
+systemctl start graccreq.service
 
 # Prepare the RPM environment
 mkdir -p /tmp/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
