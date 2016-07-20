@@ -43,7 +43,7 @@ exit 0
 
 
 install -d -m 0755 $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/
-install -m 0744 config/gracc-summary.toml $RPM_BUILD_ROOT/%{_sysconfdir}/graccreq/config.d/gracc-summary.toml
+install -m 0744 config/gracc-summary.toml $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 install -d -m 0755 $RPM_BUILD_ROOT/%{_unitdir}
 install -m 0744 config/graccsum.service $RPM_BUILD_ROOT/%{_unitdir}/
 install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
