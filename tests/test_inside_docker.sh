@@ -54,6 +54,8 @@ popd
 
 # Start the gracc periodic summarizer after data has been imported
 systemctl start graccsumperiodic.service
+sleep 10
+journalctl -u graccsumperiodic.service --no-pager
 
 pushd gracc-summary
 python -m unittest discover tests/unittests "test_*.py"
