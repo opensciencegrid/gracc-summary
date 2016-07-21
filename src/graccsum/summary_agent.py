@@ -1,5 +1,6 @@
 import toml
 import argparse
+import pika
 
 
 class SummaryAgent(object):
