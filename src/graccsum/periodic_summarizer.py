@@ -8,7 +8,8 @@ class PeriodicSummarizer(object):
     
     def __init__(self, config):
         
-        self._config = config
+        with open(config) as conffile:
+            self._config = toml.loads(conffile.read())
         
     def runRules(self):
         

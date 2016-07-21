@@ -6,7 +6,8 @@ import pika
 class SummaryAgent(object):
     
     def __init__(self, config):
-        self._config = config
+        with open(config) as conffile:
+            self._config = toml.loads(conffile.read())
         
     def run(self):
         
