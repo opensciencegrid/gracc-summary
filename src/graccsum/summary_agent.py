@@ -26,6 +26,25 @@ class SummaryAgent(object):
         except KeyboardInterrupt:
             self._chan.stop_consuming()
         
+    
+    def _receiveMsg(self, channel, method_frame, header_frame, body):
+        """
+        Receive messages from the AMQP queue
+        """
+        
+        msg_body = {}
+        logging.debug("Incoming message")
+        
+        try:
+            msg_body = json.loads(body)
+        except ValueError, e:
+            logging.warning("Unable to json parse the body of the message")
+            channel.basic_nack(delivery_tag=method_frame.delivery_tag)
+            return
+        
+
+        
+        
         
     def amqpConnect(self):
         logging.debug("Connecting to %s" % (self._config['AMQP']['host']))
