@@ -1,6 +1,8 @@
 import toml
 import argparse
 import pika
+import logging
+
 
 
 class SummaryAgent(object):
@@ -8,11 +10,14 @@ class SummaryAgent(object):
     def __init__(self, config):
         with open(config) as conffile:
             self._config = toml.loads(conffile.read())
+            
+        logging.basicConfig(level=logging.DEBUG)
         
     def run(self):
         
         # Setup AMQP to listen for summary records
         # AMQP Event Loop
+        logging.debug("Beginning event loop")
         self.amqpConnect()
         self._chan.basic_consume(self._receiveMsg, self._config['AMQP']['listen_queue'])
         
@@ -23,6 +28,7 @@ class SummaryAgent(object):
         
         
     def amqpConnect(self):
+        logging.debug("Connecting to %s" % (self._config['AMQP']['host']))
         credentials = pika.PlainCredentials(self._config['AMQP']['username'], self._config['AMQP']['password'])
         self.parameters = pika.ConnectionParameters(self._config['AMQP']['host'],
                                                 5672, self._config['AMQP']['vhost'], credentials)
