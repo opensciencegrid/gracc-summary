@@ -32,7 +32,7 @@ rpmbuild --define '_topdir /tmp/rpmbuild' -ba /tmp/rpmbuild/SPECS/gracc-summary.
 yum localinstall -y /tmp/rpmbuild/RPMS/noarch/gracc-summary*
 
 # Copy in the test configuration
-cp -f gracc-summary/tests/gracc-summary-test.toml /etc/graccreq/config.d/gracc-summary.toml
+cp -f gracc-summary/tests/gracc-summary-test.toml /etc/graccsum/config.d/gracc-summary.toml
 
 systemctl start graccsum.service
 
