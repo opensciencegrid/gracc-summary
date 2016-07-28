@@ -2,6 +2,7 @@ import toml
 import argparse
 from datetime import datetime, timedelta
 from graccreq import Client
+import logging
 
 
 class PeriodicSummarizer(object):
@@ -10,6 +11,8 @@ class PeriodicSummarizer(object):
         
         with open(config) as conffile:
             self._config = toml.loads(conffile.read())
+            
+        logging.basicConfig(level=logging.DEBUG)
         
     def runRules(self):
         
@@ -22,6 +25,7 @@ class PeriodicSummarizer(object):
             end_time = datetime.today()
             start_time = end_time - timedelta(days=7)
             
+            logging.debug("Starting query to remote requster")
             client.query(start_time, end_time, 'summary', 
                 destination_exchange=self._config['PeriodicSummarizer']['destination_exchange'], 
                 destination_key=self._config['PeriodicSummarizer']['destination_key'])
