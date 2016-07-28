@@ -15,7 +15,8 @@ class PeriodicSummarizer(object):
         
         while True:
             # Every 15 minutes, resummarize the last 7 days
-            client = Client("gracc.osg.requests", "gracc.osg.requests")
+            client = Client(self._config['PeriodicSummarizer']['destination_exchange'], 
+                            self._config['PeriodicSummarizer']['destination_key'])
             
             # Get today's date, and the date 7 days ago
             end_time = datetime.today()

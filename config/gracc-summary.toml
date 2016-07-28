@@ -13,9 +13,11 @@ password = "amqppassword"
 listen_exchange = "gracc.osg.summary"
 listen_queue = "gracc.osg.summary"
 
-
 [PeriodicSummarizer]
 
 destination_exchange = "gracc.osg.summary"
 destination_key = "gracc.osg.summary"
+
+request_exchange = "gracc.osg.requests"
+request_key = "gracc.osg.requests"
 

@@ -8,8 +8,13 @@ yum -y update
 
 yum -y install python-pip git rabbitmq-server java-1.8.0-openjdk python-elasticsearch-dsl rpm-build python-srpm-macros python-rpm-macros gracc-request python2-rpm-macros epel-rpm-macros
 rpm -Uvh https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.2/elasticsearch-2.3.2.rpm
+rpm -Uvh https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.3.4-1.noarch.rpm
 
 systemctl start elasticsearch.service
+
+cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
+systemctl start logstash.service
 systemctl start rabbitmq-server.service
 systemctl start graccreq.service
 
@@ -34,11 +39,11 @@ yum localinstall -y /tmp/rpmbuild/RPMS/noarch/gracc-summary*
 # Copy in the test configuration
 cp -f gracc-summary/tests/gracc-summary-test.toml /etc/graccsum/config.d/gracc-summary.toml
 
-systemctl start graccsum.service
+#systemctl start graccsum.service
 
 # Wait for the summarizer to start up
-sleep 10
-journalctl -u graccsum.service --no-pager
+#sleep 10
+#journalctl -u graccsum.service --no-pager
 
 
 # Install the test data
@@ -57,12 +62,12 @@ systemctl start graccsumperiodic.service
 sleep 10
 journalctl -u graccsumperiodic.service --no-pager
 
-pushd gracc-summary
-python -m unittest discover tests/unittests "test_*.py"
-popd
+#pushd gracc-summary
+#python -m unittest discover tests/unittests "test_*.py"
+#popd
 
 sleep 30
-journalctl -u graccsum.service --no-pager -n 20
+journalctl -u graccreq.service --no-pager -n 20
 
 
 

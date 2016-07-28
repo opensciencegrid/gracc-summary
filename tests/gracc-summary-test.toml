@@ -19,3 +19,6 @@ listen_queue = "gracc.osg.summary"
 destination_exchange = "gracc.osg.summary"
 destination_key = "gracc.osg.summary"
 
+request_exchange = "gracc.osg.requests"
+request_key = "gracc.osg.requests"
+
