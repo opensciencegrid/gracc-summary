@@ -17,6 +17,8 @@ mkdir -p /usr/share/gracc/
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
 systemctl start logstash.service
 systemctl start rabbitmq-server.service
+
+cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
 
 # Prepare the RPM environment
