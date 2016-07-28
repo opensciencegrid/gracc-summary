@@ -13,6 +13,7 @@ rpm -Uvh https://download.elastic.co/logstash/logstash/packages/centos/logstash-
 systemctl start elasticsearch.service
 
 cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+mkdir -p /usr/share/gracc/
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
 systemctl start logstash.service
 systemctl start rabbitmq-server.service
