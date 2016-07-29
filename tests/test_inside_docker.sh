@@ -79,5 +79,5 @@ journalctl -u logstash.service --no-pager -n 100
 
 journalctl -u graccsumperiodic.service --no-pager
 
-exit unittest_exit
+exit $unittest_exit
 
