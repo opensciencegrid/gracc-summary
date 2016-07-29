@@ -7,6 +7,8 @@ import dateutil.parser
 import random
 import pika
 import json
+import subprocess
+import time
 
 
 
@@ -79,12 +81,23 @@ class TestPeriodicSummarizer(unittest.TestCase):
     def test_periodic_summarizer(self):
         
         # Restart the graccsumperiodic service 
+        subprocess.call("systemctl restart graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
+        time.sleep(10)
         
         # Check the database for new summary records.
+        client = Elasticsearch()
+        s = Search(using=client, index='gracc.osg.summary*') \
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
+        .params(search_type="count")
         
-        pass 
+        response = s.execute()
+        
+        print response
+        
+        self.assertGreater(response.hits.total, 0)
+        
         
 
 
