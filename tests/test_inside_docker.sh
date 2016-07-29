@@ -66,7 +66,10 @@ sleep 10
 journalctl -u graccsumperiodic.service --no-pager
 
 pushd gracc-summary/
+set +e
 python -m unittest discover tests/unittests "test_*.py"
+unittest_exit=$?
+set -e
 popd
 
 sleep 30
@@ -74,5 +77,7 @@ journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
 
+journalctl -u graccsumperiodic.service --no-pager
 
+exit unittest_exit
 
