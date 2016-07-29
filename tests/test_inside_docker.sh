@@ -65,9 +65,9 @@ systemctl start graccsumperiodic.service
 sleep 10
 journalctl -u graccsumperiodic.service --no-pager
 
-#pushd gracc-summary
-#python -m unittest discover tests/unittests "test_*.py"
-#popd
+pushd gracc-summary/
+python -m unittest discover tests/unittests "test_*.py"
+popd
 
 sleep 30
 journalctl -u graccreq.service --no-pager -n 100
