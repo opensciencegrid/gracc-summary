@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timedelta
 from graccreq import Client
 import logging
+import time
 
 
 class PeriodicSummarizer(object):
