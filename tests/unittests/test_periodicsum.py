@@ -38,13 +38,6 @@ class TestPeriodicSummarizer(unittest.TestCase):
         response = s.execute()
         to_upload = []
         
-        # Upload the new records to ElasticSearch
-        credentials = pika.PlainCredentials("guest", "guest")
-        parameters = pika.ConnectionParameters("localhost",
-                                                5672, "/", credentials)
-        self.conn = pika.adapters.blocking_connection.BlockingConnection(parameters)
-        
-        self.channel = self.conn.channel()
         
         # Update the EndTimes
         for hit in s.scan():
@@ -65,18 +58,13 @@ class TestPeriodicSummarizer(unittest.TestCase):
             
             # Update the new EndTime and add to upload
             hit.EndTime = (cur_endtime + diff).isoformat()
-            print "New EndTime = %s" % hit.EndTime
-            self.channel.basic_publish("gracc.osg.summary",
-                                  "gracc.osg.summary",
-                                  json.dumps(hit.to_dict()),
-                                  pika.BasicProperties(content_type='text/json',
-                                                       delivery_mode=1))
-            to_upload.append(hit) 
+            
+            client.index(index="gracc.osg.summary", doc_type='JobUsageRecord', body=hit.to_dict())
+
+            #to_upload.append(hit) 
         
         
 
-        
-        pass
         
     def test_periodic_summarizer(self):
         
