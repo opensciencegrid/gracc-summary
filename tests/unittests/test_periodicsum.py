@@ -63,7 +63,23 @@ class TestPeriodicSummarizer(unittest.TestCase):
 
             #to_upload.append(hit) 
         
+    
+    def test_raw_data(self):
+        """
+        Testing the tester!
+        """
         
+        # Check the raw indexes for records from the last 7 days
+        client = Elasticsearch()
+        s = Search(using=client, index='gracc.osg.raw0-*') \
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
+        .params(search_type="count")
+        
+        reponse = s.execute()
+        
+        print response
+        
+        self.assertGreater(response.hits.total, 0)
 
         
     def test_periodic_summarizer(self):
