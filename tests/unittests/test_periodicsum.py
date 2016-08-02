@@ -78,6 +78,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         response = s.execute()
         
         print response
+        print response.hits.total
         
         self.assertGreater(response.hits.total, 0)
 
@@ -88,7 +89,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         subprocess.call("systemctl restart graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
-        time.sleep(30)
+        time.sleep(60)
         
         # Check the database for new summary records.
         client = Elasticsearch()
@@ -99,6 +100,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         response = s.execute()
         
         print response
+        print response.hits.total
         
         self.assertGreater(response.hits.total, 0)
         
