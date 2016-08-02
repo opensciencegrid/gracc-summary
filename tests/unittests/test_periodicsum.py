@@ -72,7 +72,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         subprocess.call("systemctl restart graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
-        time.sleep(10)
+        time.sleep(30)
         
         # Check the database for new summary records.
         client = Elasticsearch()
