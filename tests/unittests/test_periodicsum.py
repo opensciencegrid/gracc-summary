@@ -75,7 +75,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
         .params(search_type="count")
         
-        reponse = s.execute()
+        response = s.execute()
         
         print response
         
