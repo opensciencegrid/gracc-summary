@@ -59,7 +59,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
             # Update the new EndTime and add to upload
             hit.EndTime = (cur_endtime + diff).isoformat()
             
-            client.index(index="gracc.osg.raw-now", doc_type='JobUsageRecord', body=hit.to_dict())
+            client.index(index="gracc.osg.raw0-now", doc_type='JobUsageRecord', body=hit.to_dict())
 
             #to_upload.append(hit) 
         
