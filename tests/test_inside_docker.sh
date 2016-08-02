@@ -14,9 +14,13 @@ systemctl start elasticsearch.service
 
 cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
 mkdir -p /usr/share/gracc/
+
+# Create the rabbitmq exchange we need for summary records
+systemctl start rabbitmq-server.service
+sleep 2
+python gracc-summary/tests/create_summary_exchange.py
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
 systemctl start logstash.service
-systemctl start rabbitmq-server.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
