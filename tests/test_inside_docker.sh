@@ -21,6 +21,7 @@ sleep 2
 python gracc-summary/tests/create_summary_exchange.py
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
 cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+echo "JAVACMD=/usr/bin/java" >> /etc/sysconfig/logstash
 systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
