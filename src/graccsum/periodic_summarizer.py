@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timedelta
 from graccreq import Client
 import logging
+import time
 
 
 class PeriodicSummarizer(object):
@@ -18,8 +19,7 @@ class PeriodicSummarizer(object):
         
         while True:
             # Every 15 minutes, resummarize the last 7 days
-            client = Client(self._config['PeriodicSummarizer']['destination_exchange'], 
-                            self._config['PeriodicSummarizer']['destination_key'])
+            client = Client("gracc.osg.requests", "gracc.osg.requests")
             
             # Get today's date, and the date 7 days ago
             end_time = datetime.today()

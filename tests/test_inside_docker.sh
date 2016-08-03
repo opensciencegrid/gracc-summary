@@ -6,17 +6,22 @@ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 curl -o /etc/yum.repos.d/djw8605-GRACC-epel-7.repo https://copr.fedorainfracloud.org/coprs/djw8605/GRACC/repo/epel-7/djw8605-GRACC-epel-7.repo 
 yum -y update
 
-yum -y install python-pip git rabbitmq-server java-1.8.0-openjdk python-elasticsearch-dsl rpm-build python-srpm-macros python-rpm-macros gracc-request python2-rpm-macros epel-rpm-macros
+yum -y install python-pip git rabbitmq-server java-1.8.0-openjdk python-elasticsearch-dsl rpm-build python-srpm-macros python-rpm-macros gracc-request python2-rpm-macros epel-rpm-macros which
 rpm -Uvh https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.2/elasticsearch-2.3.2.rpm
 rpm -Uvh https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.3.4-1.noarch.rpm
 
 systemctl start elasticsearch.service
 
-cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+
 mkdir -p /usr/share/gracc/
-cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
-systemctl start logstash.service
+
+# Create the rabbitmq exchange we need for summary records
 systemctl start rabbitmq-server.service
+sleep 2
+python gracc-summary/tests/create_summary_exchange.py
+cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
+cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
@@ -65,14 +70,20 @@ systemctl start graccsumperiodic.service
 sleep 10
 journalctl -u graccsumperiodic.service --no-pager
 
-#pushd gracc-summary
-#python -m unittest discover tests/unittests "test_*.py"
-#popd
+pushd gracc-summary/
+set +e
+python -m unittest discover tests/unittests "test_*.py"
+unittest_exit=$?
+set -e
+popd
 
-sleep 30
+sleep 2
 journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
+cat /var/log/logstash/*
 
+journalctl -u graccsumperiodic.service --no-pager
 
+exit $unittest_exit
 
