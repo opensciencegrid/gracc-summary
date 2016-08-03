@@ -77,7 +77,7 @@ unittest_exit=$?
 set -e
 popd
 
-sleep 30
+sleep 2
 journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
