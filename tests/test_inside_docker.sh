@@ -12,7 +12,7 @@ rpm -Uvh https://download.elastic.co/logstash/logstash/packages/centos/logstash-
 
 systemctl start elasticsearch.service
 
-cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+
 mkdir -p /usr/share/gracc/
 
 # Create the rabbitmq exchange we need for summary records
@@ -20,6 +20,7 @@ systemctl start rabbitmq-server.service
 sleep 2
 python gracc-summary/tests/create_summary_exchange.py
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
+cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
 systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
@@ -80,7 +81,7 @@ sleep 30
 journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
-cat /var/log/logstash/logstash.log
+cat /var/log/logstash/*
 
 journalctl -u graccsumperiodic.service --no-pager
 
