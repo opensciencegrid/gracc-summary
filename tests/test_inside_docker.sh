@@ -84,6 +84,9 @@ journalctl -u graccreq.service --no-pager -n 100
 journalctl -u logstash.service --no-pager -n 100
 cat /var/log/logstash/*
 
+ls -l /usr/bin/java
+namei /usr/bin/java
+
 journalctl -u graccsumperiodic.service --no-pager
 
 exit $unittest_exit
