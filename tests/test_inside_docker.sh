@@ -23,6 +23,10 @@ cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gra
 cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
 echo "JAVACMD=/usr/bin/java" >> /etc/sysconfig/logstash
 systemctl start logstash.service
+sleep 2
+systemctl restart logstash.service
+sleep 2
+systemctl status logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service

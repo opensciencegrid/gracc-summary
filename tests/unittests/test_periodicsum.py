@@ -96,7 +96,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         subprocess.call("systemctl restart graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
-        time.sleep(60)
+        time.sleep(10)
         
         # Refresh the indexes
         client.indices.refresh(index='gracc.osg.summary*')
