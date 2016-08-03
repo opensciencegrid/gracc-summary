@@ -112,7 +112,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         print response
         print response.hits.total
         
-        stats = client.cat.indices(index='gracc.osg.summary*')
+        stats = client.cat.indices(index='_all')
         print stats
         
         self.assertGreater(response.hits.total, 0)
