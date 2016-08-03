@@ -80,6 +80,7 @@ sleep 30
 journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
+cat /var/log/logstash/logstash.log
 
 journalctl -u graccsumperiodic.service --no-pager
 
