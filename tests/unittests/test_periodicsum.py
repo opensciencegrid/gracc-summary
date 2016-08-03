@@ -86,14 +86,17 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
     def test_periodic_summarizer(self):
         
+        # Check the database for new summary records.
+        client = Elasticsearch()
+        
+        # Refresh the indexes
+        client.indices.refresh(index='gracc.osg.raw*')
+        
         # Restart the graccsumperiodic service 
         subprocess.call("systemctl restart graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
         time.sleep(60)
-        
-        # Check the database for new summary records.
-        client = Elasticsearch()
         
         # Refresh the indexes
         client.indices.refresh(index='gracc.osg.summary*')
