@@ -21,12 +21,7 @@ sleep 2
 python gracc-summary/tests/create_summary_exchange.py
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
 cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
-echo "JAVACMD=/usr/bin/java" >> /etc/sysconfig/logstash
 systemctl start logstash.service
-sleep 2
-systemctl restart logstash.service
-sleep 2
-systemctl status logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
@@ -87,9 +82,6 @@ journalctl -u graccreq.service --no-pager -n 100
 
 journalctl -u logstash.service --no-pager -n 100
 cat /var/log/logstash/*
-
-ls -l /usr/bin/java
-namei /usr/bin/java
 
 journalctl -u graccsumperiodic.service --no-pager
 
