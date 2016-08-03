@@ -45,7 +45,6 @@ exit 0
 install -d -m 0755 $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/
 install -m 0744 config/gracc-summary.toml $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 install -d -m 0755 $RPM_BUILD_ROOT/%{_unitdir}
-install -m 0744 config/graccsum.service $RPM_BUILD_ROOT/%{_unitdir}/
 install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 
 
@@ -55,7 +54,6 @@ install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 %{python2_sitelib}/graccsum
 %{python2_sitelib}/graccsum-%{version}-py2.?.egg-info
 %attr(755, root, root) %{_bindir}/*
-%{_unitdir}/graccsum.service
 %{_unitdir}/graccsumperiodic.service
 %config %{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 
