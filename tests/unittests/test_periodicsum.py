@@ -40,7 +40,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         
         # Update the EndTimes
-        for hit in s.scan():
+        for hit in s[:100]:
             print hit.EndTime
             # Determine the number of days between the current EndTime and now
             try:
@@ -61,7 +61,8 @@ class TestPeriodicSummarizer(unittest.TestCase):
             
             client.index(index="gracc.osg.raw0-now", doc_type='JobUsageRecord', body=hit.to_dict())
 
-            #to_upload.append(hit) 
+            #to_upload.append(hit)
+        
         
     
     def test_raw_data(self):
@@ -93,6 +94,12 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         # Check the database for new summary records.
         client = Elasticsearch()
+        
+        # Refresh the indexes
+        client.indices.refresh(index='gracc.osg.summary*')
+        time.sleep(10)
+        
+        # Search for the summary records
         s = Search(using=client, index='gracc.osg.summary*') \
         .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
         .params(search_type="count")
