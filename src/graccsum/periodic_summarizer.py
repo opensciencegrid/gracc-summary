@@ -19,7 +19,13 @@ class PeriodicSummarizer(object):
         
         while True:
             # Every 15 minutes, resummarize the last 7 days
-            client = Client("gracc.osg.requests", "gracc.osg.requests")
+            client = Client(
+                exchange=self._config['PeriodicSummarizer']['request_exchange'],
+                routing_key=self._config['PeriodicSummarizer']['request_key'],
+                host=self._config['AMQP']['host'],
+                vhost=self._config['AMQP']['vhost'],
+                username=self._config['AMQP']['username'],
+                password=self._config['AMQP']['password'])
             
             # Get today's date, and the date 7 days ago
             end_time = datetime.today()
