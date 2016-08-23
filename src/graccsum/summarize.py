@@ -17,7 +17,7 @@ def main():
     # Arguments for the AMQP
     parser.add_argument('--exchange', dest='exchange', help="Exchange to send summarize request", default="gracc.osg.requests")
     parser.add_argument('--routing_key', dest='routing_key', help="Routing key to use for summarize request", default="gracc.osg.requests")
-    parser.add_arugment('--host', dest='host', help="Host of AMQP broker", default="localhost")
+    parser.add_argument('--host', dest='host', help="Host of AMQP broker", default="localhost")
     parser.add_argument('--username', dest='username', help="Username for AMQP broker", default="guest")
     parser.add_argument('--password', dest='password', help="Password for AMQP broker", default="guest")
     
