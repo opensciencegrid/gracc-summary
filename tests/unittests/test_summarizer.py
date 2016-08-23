@@ -68,6 +68,10 @@ class TestSummarizer(unittest.TestCase):
         subprocess.call("graccsummarizer \"2016-01-01\" \"2017-01-01\"", shell=True)
         
         time.sleep(20)
+        client = Elasticsearch()
+        client.indices.refresh(index='gracc.osg.summary*')
+        stats = client.cat.indices(index='_all')
+        print stats
                 
         self.assertGreater(self._getCount(), 0)
         
