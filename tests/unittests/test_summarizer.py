@@ -27,6 +27,7 @@ class TestSummarizer(unittest.TestCase):
         
     def _getCount(self):
         client = Elasticsearch()
+        client.indices.refresh(index='gracc.osg.summary*')
         s = Search(using=client, index='gracc.osg.summary*') \
         .filter('range', **{'EndTime': {'from': '2016-01-01', 'to': '2017-01-01'}}) \
         .params(search_type="count")
@@ -69,7 +70,6 @@ class TestSummarizer(unittest.TestCase):
         
         time.sleep(20)
         client = Elasticsearch()
-        client.indices.refresh(index='gracc.osg.summary*')
         stats = client.cat.indices(index='_all')
         print stats
                 
