@@ -3,7 +3,7 @@ import os
 
 
 setup(name='graccsum',
-      version='1.0',
+      version='1.1',
       description='GRACC Summary Agent',
       author_email='dweitzel@cse.unl.edu',
       author='Derek Weitzel',
@@ -19,8 +19,8 @@ setup(name='graccsum',
       ],
       entry_points= {
             'console_scripts': [
-                  'graccsum = graccsum.summary_agent:main',
-                  'graccsumperiodic = graccsum.periodic_summarizer:main'
+                  'graccsumperiodic = graccsum.periodic_summarizer:main',
+                  'graccsummarizer = graccsum.summarize:main'
             ]
       }
 )
