@@ -25,7 +25,7 @@ class TestSummarizer(unittest.TestCase):
         client = Elasticsearch()
         client.indices.delete("gracc.osg.summary*")
         
-    def _getCount():
+    def _getCount(self):
         client = Elasticsearch()
         s = Search(using=client, index='gracc.osg.summary*') \
         .filter('range', **{'EndTime': {'from': '2016-01-01', 'to': '2017-01-01'}}) \
