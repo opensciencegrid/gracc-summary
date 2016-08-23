@@ -42,7 +42,7 @@ def main():
         client.query(from_date, tmp_to_date, 'summary', destination_exchange=args.destination_exchange, destination_key=args.destination_key)
         
         # Update the from date
-        from_date += tmp_to_date
+        from_date = datetime.datetime(tmp_to_date)
     
 
 
