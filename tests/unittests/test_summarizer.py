@@ -41,18 +41,24 @@ class TestSummarizer(unittest.TestCase):
         
         subprocess.call("graccsummarizer \"2016-06-01\" \"2016-06-02\"", shell=True)
         
+        time.sleep(20)
+        
         self.assertGreater(self._getCount(), 0)
         
         
     def test_SevenDay(self):
         "Test 7 Days worth of data"
         subprocess.call("graccsummarizer \"2016-06-01\" \"2016-06-07\"", shell=True)
+        
+        time.sleep(20)
                 
         self.assertGreater(self._getCount(), 0)
     
     def test_ThirtyDays(self):
         "Test 30 days worth of data"
         subprocess.call("graccsummarizer \"2016-06-01\" \"2016-07-01\"", shell=True)
+        
+        time.sleep(20)
                 
         self.assertGreater(self._getCount(), 0)
         
@@ -60,6 +66,8 @@ class TestSummarizer(unittest.TestCase):
     def test_OneYear(self):
         "Test 1 year worth of data"
         subprocess.call("graccsummarizer \"2016-01-01\" \"2017-01-01\"", shell=True)
+        
+        time.sleep(20)
                 
         self.assertGreater(self._getCount(), 0)
         
