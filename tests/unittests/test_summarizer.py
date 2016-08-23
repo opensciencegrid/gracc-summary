@@ -40,7 +40,7 @@ class TestSummarizer(unittest.TestCase):
     def test_OneDay(self):
         "Test 1 day worth of data"
         
-        subprocess.call("graccsummarizer \"2016-06-01\" \"2016-06-02\"", shell=True)
+        subprocess.call("graccsummarizer \"2016-06-04\" \"2016-06-05\"", shell=True)
         
         time.sleep(20)
         
