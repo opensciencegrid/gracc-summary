@@ -1,5 +1,5 @@
 Name:           gracc-summary
-Version:        1.0
+Version:        1.1
 Release:        1%{?dist}
 Summary:        GRACC Summary Agents
 
@@ -62,7 +62,9 @@ install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 %changelog
+* Tue Aug 23 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.1-1
+- Adding the summarizer command line
 
-* Wed Jul 20 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.1-1
+* Wed Jul 20 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.0-1
 - Initial build
 
