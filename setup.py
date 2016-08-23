@@ -3,7 +3,7 @@ import os
 
 
 setup(name='graccsum',
-      version='1.1',
+      version='1.2',
       description='GRACC Summary Agent',
       author_email='dweitzel@cse.unl.edu',
       author='Derek Weitzel',
