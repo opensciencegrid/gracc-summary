@@ -63,7 +63,7 @@ install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 
 %changelog
 * Tue Aug 23 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.2-1
-- Adding the summarizer command line
+- Add vhost argument to summarizer
 
 * Tue Aug 23 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.1-1
 - Adding the summarizer command line
