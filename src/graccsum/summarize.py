@@ -11,8 +11,8 @@ def main():
     # Read the command line arguments
     parser = argparse.ArgumentParser(description="Force summarization for a given time period")
     
-    parser.add_argument('from_str', metavar='from', help="Dateutil parsable date beginning of summarization period", required=True)
-    parser.add_argument('to_str', metavar='to', help="Dateutil parsable date end of summarization period", required=True)
+    parser.add_argument('from_str', metavar='from', help="Dateutil parsable date beginning of summarization period")
+    parser.add_argument('to_str', metavar='to', help="Dateutil parsable date end of summarization period")
     
     # Arguments for the AMQP
     parser.add_argument('--exchange', dest=exchange, help="Exchange to send summarize request", default="gracc.osg.requests")
