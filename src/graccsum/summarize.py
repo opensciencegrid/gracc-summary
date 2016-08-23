@@ -15,15 +15,15 @@ def main():
     parser.add_argument('to_str', metavar='to', help="Dateutil parsable date end of summarization period")
     
     # Arguments for the AMQP
-    parser.add_argument('--exchange', dest=exchange, help="Exchange to send summarize request", default="gracc.osg.requests")
-    parser.add_argument('--routing_key', dest=routing_key, help="Routing key to use for summarize request", default="gracc.osg.requests")
-    parser.add_arugment('--host', dest=host, help="Host of AMQP broker", default="localhost")
-    parser.add_argument('--username', dest=username, help="Username for AMQP broker", default="guest")
-    parser.add_argument('--password', dest=password, help="Password for AMQP broker", default="guest")
+    parser.add_argument('--exchange', dest='exchange', help="Exchange to send summarize request", default="gracc.osg.requests")
+    parser.add_argument('--routing_key', dest='routing_key', help="Routing key to use for summarize request", default="gracc.osg.requests")
+    parser.add_arugment('--host', dest='host', help="Host of AMQP broker", default="localhost")
+    parser.add_argument('--username', dest='username', help="Username for AMQP broker", default="guest")
+    parser.add_argument('--password', dest='password', help="Password for AMQP broker", default="guest")
     
     # Arguments to send to the remote summarizer
-    parser.add_argument('--destination_exchange', dest=destination_exchange, help="Exchange to send summarized records", default="gracc.osg.summary")
-    parser.add_argument('--destination_key', dest=destination_key, help="Routing key to send summarized records", default="gracc.osg.summary")
+    parser.add_argument('--destination_exchange', dest='destination_exchange', help="Exchange to send summarized records", default="gracc.osg.summary")
+    parser.add_argument('--destination_key', dest='destination_key', help="Routing key to send summarized records", default="gracc.osg.summary")
     
     # Parse the arguments
     args = parser.parse_args()
