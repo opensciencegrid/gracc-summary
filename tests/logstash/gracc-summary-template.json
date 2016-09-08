@@ -351,6 +351,22 @@
                         "type" : "string",
                         "index" : "not_analyzed"
                     },
+                    "PIName" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
+                    },
+                    "Organization" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
+                    },
+                    "Department" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
+                    },
+                    "FieldOfScience" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
+                    },
                     "ProjectName_description" : {
                         "type" : "string"
                     },
