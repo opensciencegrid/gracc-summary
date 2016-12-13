@@ -70,8 +70,10 @@ set +e
 systemctl start graccsumperiodic.timer
 exit_code=$?
 systemctl status graccsumperiodic.timer
+journalctl -u graccsumperiodic.timer -n 100 --no-pager
+journalctl -u graccsumperiodic.service -n 100 --no-pager
 systemctl list-timers --all
-journalctl -xe
+
 if [ "$exit_code" -eq "1" ]; then
   exit $exit_code
 fi
