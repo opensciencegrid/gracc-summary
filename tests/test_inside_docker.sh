@@ -25,6 +25,8 @@ systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
+sleep 10
+journalctl -u graccreq.service -n 100 --no-pager
 
 # Prepare the RPM environment
 mkdir -p /tmp/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
