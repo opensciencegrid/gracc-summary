@@ -66,8 +66,15 @@ bash -x ./import.sh
 popd
 
 # Start the gracc periodic summarizer after data has been imported
+set +e
 systemctl start graccsumperiodic.timer
+exit_code=$?
+systemctl status graccsumperiodic.timer
 systemctl list-timers --all
+if [ "$exit_code" -eq "1" ]; then
+  exit $exit_code
+fi
+set -e
 sleep 65
 journalctl -u graccsumperiodic.service --no-pager
 
