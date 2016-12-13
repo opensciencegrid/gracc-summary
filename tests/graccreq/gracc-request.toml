@@ -16,9 +16,3 @@ queue = 'gracc.osg.requests'
 raw_index = 'gracc.osg.raw0-*'
 raw_type = 'JobUsageRecord'
 
-
-# Configuration for the 
-[AMQP.osg]
-
-exchange = 'gracc.osg.requests'
-queue = 'gracc.osg.requests'
