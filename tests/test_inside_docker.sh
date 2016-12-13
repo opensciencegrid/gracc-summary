@@ -93,5 +93,8 @@ cat /var/log/logstash/*
 
 journalctl -u graccsumperiodic.service --no-pager
 
+# Look at the summarization profile metrics
+cat /tmp/profile.txt
+
 exit $unittest_exit
 
