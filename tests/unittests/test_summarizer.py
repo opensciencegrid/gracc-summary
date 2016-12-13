@@ -69,7 +69,7 @@ class TestSummarizer(unittest.TestCase):
         Test 1 year worth of data
         Takes too long to run 1 year, so just do ~3 months
         """
-        subprocess.call("graccsummarizer \"2016-05-01\" \"2017-08-01\"", shell=True)
+        subprocess.call("graccsummarizer \"2016-05-01\" \"2016-08-01\"", shell=True)
         
         time.sleep(20)
         client = Elasticsearch()
