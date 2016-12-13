@@ -66,9 +66,12 @@ bash -x ./import.sh
 popd
 
 # Start the gracc periodic summarizer after data has been imported
-systemctl start graccsumperiodic.service
-sleep 10
+systemctl start graccsumperiodic.timer
+systemctl list-timers --all
+sleep 65
 journalctl -u graccsumperiodic.service --no-pager
+
+
 
 pushd gracc-summary/
 set +e
