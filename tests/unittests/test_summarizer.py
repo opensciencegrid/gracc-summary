@@ -19,7 +19,7 @@ class TestSummarizer(unittest.TestCase):
         """
         
         # Restart the graccsumperiodic service 
-        subprocess.call("systemctl stop graccsumperiodic.service", shell=True)
+        subprocess.call("systemctl stop graccsumperiodic.timer", shell=True)
         
         # Remove all of the summary indexes from elasticsearch
         client = Elasticsearch()
