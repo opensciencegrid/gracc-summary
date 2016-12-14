@@ -25,6 +25,8 @@ systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
 systemctl start graccreq.service
+sleep 10
+journalctl -u graccreq.service -n 100 --no-pager
 
 # Prepare the RPM environment
 mkdir -p /tmp/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
@@ -66,9 +68,15 @@ bash -x ./import.sh
 popd
 
 # Start the gracc periodic summarizer after data has been imported
-systemctl start graccsumperiodic.service
-sleep 10
+systemctl start graccsumperiodic.timer
+systemctl status graccsumperiodic.timer
+journalctl -u graccsumperiodic.timer -n 100 --no-pager
+journalctl -u graccsumperiodic.service -n 100 --no-pager
+# systemctl list-timers --all
+sleep 65
 journalctl -u graccsumperiodic.service --no-pager
+
+
 
 pushd gracc-summary/
 set +e
@@ -84,6 +92,9 @@ journalctl -u logstash.service --no-pager -n 100
 cat /var/log/logstash/*
 
 journalctl -u graccsumperiodic.service --no-pager
+
+# Look at the summarization profile metrics
+cat /tmp/profile.txt
 
 exit $unittest_exit
 

@@ -19,7 +19,7 @@ class TestSummarizer(unittest.TestCase):
         """
         
         # Restart the graccsumperiodic service 
-        subprocess.call("systemctl stop graccsumperiodic.service", shell=True)
+        subprocess.call("systemctl stop graccsumperiodic.timer", shell=True)
         
         # Remove all of the summary indexes from elasticsearch
         client = Elasticsearch()
@@ -65,8 +65,11 @@ class TestSummarizer(unittest.TestCase):
         
         
     def test_OneYear(self):
-        "Test 1 year worth of data"
-        subprocess.call("graccsummarizer \"2016-01-01\" \"2017-01-01\"", shell=True)
+        """
+        Test 1 year worth of data
+        Takes too long to run 1 year, so just do ~3 months
+        """
+        subprocess.call("graccsummarizer \"2016-05-01\" \"2016-08-01\"", shell=True)
         
         time.sleep(20)
         client = Elasticsearch()

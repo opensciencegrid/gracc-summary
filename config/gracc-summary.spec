@@ -1,5 +1,5 @@
 Name:           gracc-summary
-Version:        1.2
+Version:        1.3
 Release:        1%{?dist}
 Summary:        GRACC Summary Agents
 
@@ -46,6 +46,7 @@ install -d -m 0755 $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/
 install -m 0744 config/gracc-summary.toml $RPM_BUILD_ROOT/%{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 install -d -m 0755 $RPM_BUILD_ROOT/%{_unitdir}
 install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
+install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 
@@ -55,6 +56,7 @@ install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 %{python2_sitelib}/graccsum-%{version}-py2.?.egg-info
 %attr(755, root, root) %{_bindir}/*
 %{_unitdir}/graccsumperiodic.service
+%{_unitdir}/graccsumperiodic.timer
 %config %{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 
 %doc
@@ -62,6 +64,9 @@ install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 %changelog
+* Tue Dec 13 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.3-1
+- Change summarizer to systemd service
+
 * Tue Aug 23 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.2-1
 - Add vhost argument to summarizer
 

@@ -7,8 +7,7 @@ After=network-online.target
 [Service]
 User=gracc
 Group=gracc
-Type=simple
-Restart=on-failure
+Type=oneshot
 ExecStart=/usr/bin/graccsumperiodic -c /etc/graccsum/config.d/gracc-summary.toml
 TimeoutStopSec=20
 
