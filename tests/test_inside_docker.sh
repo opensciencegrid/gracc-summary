@@ -7,8 +7,8 @@ curl -o /etc/yum.repos.d/djw8605-GRACC-epel-7.repo https://copr.fedorainfracloud
 yum -y update
 
 yum -y install python-pip git rabbitmq-server java-1.8.0-openjdk python-elasticsearch-dsl rpm-build python-srpm-macros python-rpm-macros gracc-request python2-rpm-macros epel-rpm-macros which
-rpm -Uvh https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.2/elasticsearch-2.3.2.rpm
-rpm -Uvh https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.3.4-1.noarch.rpm
+rpm -Uvh https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.rpm
+rpm -Uvh https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.rpm
 
 systemctl start elasticsearch.service
 
