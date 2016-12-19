@@ -73,15 +73,12 @@ class TestPeriodicSummarizer(unittest.TestCase):
         # Check the raw indexes for records from the last 7 days
         client = Elasticsearch()
         s = Search(using=client, index='gracc.osg.raw0-*') \
-        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
-        .params(search_type="count")
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
+    
         
-        response = s.execute()
+        print s.count()
         
-        print response
-        print response.hits.total
-        
-        self.assertGreater(response.hits.total, 0)
+        self.assertGreater(s.count(), 0)
 
         
     def test_periodic_summarizer(self):
@@ -104,18 +101,14 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         # Search for the summary records
         s = Search(using=client, index='gracc.osg.summary*') \
-        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
-        .params(search_type="count")
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
         
-        response = s.execute()
-        
-        print response
-        print response.hits.total
+        print s.count()
         
         stats = client.cat.indices(index='_all')
         print stats
         
-        self.assertGreater(response.hits.total, 0)
+        self.assertGreater(s.count(), 0)
         
         
 

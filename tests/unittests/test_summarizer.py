@@ -29,12 +29,10 @@ class TestSummarizer(unittest.TestCase):
         client = Elasticsearch()
         client.indices.refresh(index='gracc.osg.summary*')
         s = Search(using=client, index='gracc.osg.summary*') \
-        .filter('range', **{'EndTime': {'from': '2016-01-01', 'to': '2017-01-01'}}) \
-        .params(search_type="count")
+        .filter('range', **{'EndTime': {'from': '2016-01-01', 'to': '2017-01-01'}})
         
-        response = s.execute()
 
-        return response.hits.total
+        return s.count()
 
         
     def test_OneDay(self):
