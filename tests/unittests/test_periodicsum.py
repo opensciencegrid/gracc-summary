@@ -38,6 +38,10 @@ class TestPeriodicSummarizer(unittest.TestCase):
         response = s.execute()
         to_upload = []
         
+        # Get one of the raw indices' mapping, and copy it here
+        mapping = client.indices.get_mapping(index='gracc.osg.raw0-2016.07')
+        print mapping
+        client.indices.create(index='gracc.osg.raw0-now', body=mapping)
         
         # Update the EndTimes
         for hit in s[:100]:
