@@ -41,6 +41,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         # Get one of the raw indices' mapping, and copy it here
         mapping = client.indices.get_mapping(index='gracc.osg.raw0-2016.07')
         print mapping
+        client.indices.delete(index='gracc.osg.raw0-now')
         client.indices.create(index='gracc.osg.raw0-now', body=mapping['gracc.osg.raw0-2016.07'])
         
         # Update the EndTimes
