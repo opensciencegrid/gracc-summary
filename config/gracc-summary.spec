@@ -66,6 +66,7 @@ install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
 %changelog
 * Tue Dec 13 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.3-1
 - Change summarizer to systemd service
+- Update tests for ES5
 
 * Tue Aug 23 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.2-1
 - Add vhost argument to summarizer
