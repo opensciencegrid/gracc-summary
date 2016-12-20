@@ -46,6 +46,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
             try:
                 cur_endtime = dateutil.parser.parse(hit.EndTime)
                 diff = datetime.datetime.now(utc) - cur_endtime
+                cur_starttime = dateutil.parser.parse(hit.EndTime)
             except:
                 # Sometimes the endtime is list
                 print hit
@@ -58,6 +59,9 @@ class TestPeriodicSummarizer(unittest.TestCase):
             
             # Update the new EndTime and add to upload
             hit.EndTime = (cur_endtime + diff).isoformat()
+            hit.StartTime = (cur_starttime + diff).isoformat()
+            print "New endtime is %s" % str(hit.EndTime)
+            print "New starttime is %s" % str(hit.StartTime)
             
             client.index(index="gracc.osg.raw0-now", doc_type='JobUsageRecord', body=hit.to_dict())
 
