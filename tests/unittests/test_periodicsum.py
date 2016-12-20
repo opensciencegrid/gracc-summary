@@ -76,9 +76,9 @@ class TestPeriodicSummarizer(unittest.TestCase):
         .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
     
         
-        print s.count()
+        num_raw = s.count()
         
-        self.assertGreater(s.count(), 0)
+        self.assertGreater(num_raw, 0)
 
         
     def test_periodic_summarizer(self):
@@ -93,22 +93,22 @@ class TestPeriodicSummarizer(unittest.TestCase):
         subprocess.call("systemctl start graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
-        time.sleep(10)
+        time.sleep(60)
         
         # Refresh the indexes
         client.indices.refresh(index='gracc.osg.summary*')
-        time.sleep(10)
+        time.sleep(60)
         
         # Search for the summary records
         s = Search(using=client, index='gracc.osg.summary*') \
         .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
         
-        print s.count()
+        num_sum = s.count()
         
         stats = client.cat.indices(index='_all')
         print stats
         
-        self.assertGreater(s.count(), 0)
+        self.assertGreater(num_sum, 0)
         
         
 
