@@ -38,6 +38,11 @@ class TestPeriodicSummarizer(unittest.TestCase):
         response = s.execute()
         to_upload = []
         
+        # Get one of the raw indices' mapping, and copy it here
+        mapping = client.indices.get_mapping(index='gracc.osg.raw0-2016.07')
+        print mapping
+        client.indices.delete(index='gracc.osg.raw0-now', ignore=404)
+        client.indices.create(index='gracc.osg.raw0-now', body=mapping['gracc.osg.raw0-2016.07'])
         
         # Update the EndTimes
         for hit in s[:100]:
@@ -46,6 +51,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
             try:
                 cur_endtime = dateutil.parser.parse(hit.EndTime)
                 diff = datetime.datetime.now(utc) - cur_endtime
+                cur_starttime = dateutil.parser.parse(hit.StartTime)
             except:
                 # Sometimes the endtime is list
                 print hit
@@ -58,6 +64,9 @@ class TestPeriodicSummarizer(unittest.TestCase):
             
             # Update the new EndTime and add to upload
             hit.EndTime = (cur_endtime + diff).isoformat()
+            hit.StartTime = (cur_starttime + diff).isoformat()
+            print "New endtime is %s" % str(hit.EndTime)
+            print "New starttime is %s" % str(hit.StartTime)
             
             client.index(index="gracc.osg.raw0-now", doc_type='JobUsageRecord', body=hit.to_dict())
 
@@ -73,15 +82,15 @@ class TestPeriodicSummarizer(unittest.TestCase):
         # Check the raw indexes for records from the last 7 days
         client = Elasticsearch()
         s = Search(using=client, index='gracc.osg.raw0-*') \
-        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
-        .params(search_type="count")
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
+    
         
-        response = s.execute()
+        num_raw = s.count()
         
-        print response
-        print response.hits.total
+        stats = client.cat.indices(index='_all')
+        print stats
         
-        self.assertGreater(response.hits.total, 0)
+        self.assertGreater(num_raw, 0)
 
         
     def test_periodic_summarizer(self):
@@ -96,26 +105,22 @@ class TestPeriodicSummarizer(unittest.TestCase):
         subprocess.call("systemctl start graccsumperiodic.service", shell=True)
         
         # Wait for a bit to make sure the summarizer actually does it's thing
-        time.sleep(10)
+        time.sleep(60)
         
         # Refresh the indexes
         client.indices.refresh(index='gracc.osg.summary*')
-        time.sleep(10)
+        time.sleep(60)
         
         # Search for the summary records
         s = Search(using=client, index='gracc.osg.summary*') \
-        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}}) \
-        .params(search_type="count")
+        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
         
-        response = s.execute()
-        
-        print response
-        print response.hits.total
+        num_sum = s.count()
         
         stats = client.cat.indices(index='_all')
         print stats
         
-        self.assertGreater(response.hits.total, 0)
+        self.assertGreater(num_sum, 0)
         
         
 
