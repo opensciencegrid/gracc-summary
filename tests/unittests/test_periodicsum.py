@@ -46,7 +46,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
             try:
                 cur_endtime = dateutil.parser.parse(hit.EndTime)
                 diff = datetime.datetime.now(utc) - cur_endtime
-                cur_starttime = dateutil.parser.parse(hit.EndTime)
+                cur_starttime = dateutil.parser.parse(hit.StartTime)
             except:
                 # Sometimes the endtime is list
                 print hit
@@ -81,6 +81,9 @@ class TestPeriodicSummarizer(unittest.TestCase):
     
         
         num_raw = s.count()
+        
+        stats = client.cat.indices(index='_all')
+        print stats
         
         self.assertGreater(num_raw, 0)
 
