@@ -170,6 +170,9 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         self.assertGreater(num_sum, 0)
         
-        
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 
