@@ -15,9 +15,20 @@ listen_queue = "gracc.osg.summary"
 
 [PeriodicSummarizer]
 
+request_exchange = "gracc.osg.requests"
+request_key = "gracc.osg.requests"
+
+# The job summarization
+[Summary.jobs]
+summary_type = "summary"
+
 destination_exchange = "gracc.osg.summary"
 destination_key = "gracc.osg.summary"
 
-request_exchange = "gracc.osg.requests"
-request_key = "gracc.osg.requests"
+# The transfer summarization
+[Summary.transfers]
+summary_type = "transfer_summary"
+
+destination_exchange = "gracc.osg.transfer-summary"
+destination_key = "gracc.osg.transfer-summary"
 

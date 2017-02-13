@@ -15,25 +15,28 @@ class PeriodicSummarizer(object):
             
         logging.basicConfig(level=logging.DEBUG)
         
-    def runRules(self):
+    def runRules(self, restrict_type = None):
         
-        # Every 15 minutes, resummarize the last 7 days
-        client = Client(
-            exchange=self._config['PeriodicSummarizer']['request_exchange'],
-            routing_key=self._config['PeriodicSummarizer']['request_key'],
-            host=self._config['AMQP']['host'],
-            vhost=self._config['AMQP']['vhost'],
-            username=self._config['AMQP']['username'],
-            password=self._config['AMQP']['password'])
-        
-        # Get today's date, and the date 7 days ago
-        end_time = datetime.today()
-        start_time = end_time - timedelta(days=7)
-        
-        logging.debug("Starting query to remote requster")
-        client.query(start_time, end_time, 'summary', 
-            destination_exchange=self._config['PeriodicSummarizer']['destination_exchange'], 
-            destination_key=self._config['PeriodicSummarizer']['destination_key'])
+        for summary_name in self._config['Summary']:
+            cur_type = self._config['Summary'][summary_name]
+            logging.debug("Starting the summary: %s" % summary_name)
+            # Every 15 minutes, resummarize the last 7 days
+            client = Client(
+                exchange=self._config['PeriodicSummarizer']['request_exchange'],
+                routing_key=self._config['PeriodicSummarizer']['request_key'],
+                host=self._config['AMQP']['host'],
+                vhost=self._config['AMQP']['vhost'],
+                username=self._config['AMQP']['username'],
+                password=self._config['AMQP']['password'])
+            
+            # Get today's date, and the date 7 days ago
+            end_time = datetime.today()
+            start_time = end_time - timedelta(days=7)
+            
+            logging.debug("Starting query to remote requster")
+            client.query(start_time, end_time, cur_type['summary_type'], 
+                destination_exchange=cur_type['destination_exchange'], 
+                destination_key=cur_type['destination_key'])
         
         
         
