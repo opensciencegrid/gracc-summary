@@ -25,6 +25,7 @@ def main():
     # Arguments to send to the remote summarizer
     parser.add_argument('--destination_exchange', dest='destination_exchange', help="Exchange to send summarized records", default="gracc.osg.summary")
     parser.add_argument('--destination_key', dest='destination_key', help="Routing key to send summarized records", default="gracc.osg.summary")
+    parser.add_argument('--type', dest='type', help="Type of summarization to retrieve", default="guest")
     
     # Parse the arguments
     args = parser.parse_args()
@@ -40,7 +41,7 @@ def main():
     while (from_date < to_date):
         tmp_to_date = min(from_date + datetime.timedelta(days=7), to_date)
         print "Summarizing %s to %s" % (from_date.isoformat(), tmp_to_date.isoformat())
-        client.query(from_date, tmp_to_date, 'summary', destination_exchange=args.destination_exchange, destination_key=args.destination_key)
+        client.query(from_date, tmp_to_date, args.type, destination_exchange=args.destination_exchange, destination_key=args.destination_key)
         
         # Update the from date
         from_date = tmp_to_date

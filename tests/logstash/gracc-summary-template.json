@@ -1,13 +1,13 @@
 {
     "order" : 0,
-    "template" : "gracc.osg.summary0-*",
+    "template" : "gracc.osg.summary2-*",
     "settings" : {
         "index" : {
             "translog" : {
                 "sync_interval" : "5s",
                 "durability" : "async"
             },
-            "number_of_shards" : 1,
+            "number_of_shards" : 3,
             "number_of_replicas" : 1,
             "refresh_interval" : "60s"
         }

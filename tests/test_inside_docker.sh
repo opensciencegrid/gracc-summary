@@ -20,7 +20,7 @@ systemctl start rabbitmq-server.service
 sleep 2
 python gracc-summary/tests/create_summary_exchange.py
 cp gracc-summary/tests/logstash/gracc-summary-template.json /usr/share/gracc/gracc-summary-template.json
-cp gracc-summary/tests/logstash/logstash.conf /etc/logstash/conf.d
+cp gracc-summary/tests/logstash/logstash.conf gracc-summary/tests/logstash/gracc-transfer-summary.conf /etc/logstash/conf.d
 systemctl start logstash.service
 
 cp gracc-summary/tests/graccreq/gracc-request.toml /etc/graccreq/config.d/gracc-request.toml
@@ -80,7 +80,7 @@ journalctl -u graccsumperiodic.service --no-pager
 
 pushd gracc-summary/
 set +e
-python -m unittest discover tests/unittests "test_*.py"
+python -m unittest discover -v tests/unittests "test_*.py"
 unittest_exit=$?
 set -e
 popd
