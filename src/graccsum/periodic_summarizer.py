@@ -34,7 +34,7 @@ class PeriodicSummarizer(object):
             start_time = end_time - timedelta(days=7)
             
             logging.debug("Starting query to remote requster")
-            client.query(start_time, end_time, cur_type=['summary_type'], 
+            client.query(start_time, end_time, cur_type['summary_type'], 
                 destination_exchange=cur_type['destination_exchange'], 
                 destination_key=cur_type['destination_key'])
         
