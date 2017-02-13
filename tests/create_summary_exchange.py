@@ -9,3 +9,6 @@ channel = conn.channel()
 
 channel.exchange_declare(exchange="gracc.osg.summary", exchange_type='fanout', durable=True, auto_delete=False)
 
+
+channel.exchange_declare(exchange="gracc.osg.transfer-summary", exchange_type='fanout', durable=True, auto_delete=False)
+
