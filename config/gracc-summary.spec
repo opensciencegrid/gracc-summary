@@ -1,5 +1,5 @@
 Name:           gracc-summary
-Version:        1.3
+Version:        2.0
 Release:        1%{?dist}
 Summary:        GRACC Summary Agents
 
@@ -64,6 +64,10 @@ install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 %changelog
+* Mon Feb 13 2017 Derek Weitzel <dweitzel@cse.unl.edu> 2.0-1
+- Adding transfer summaries
+- Breaks configuration from earlier versions
+
 * Tue Dec 13 2016 Derek Weitzel <dweitzel@cse.unl.edu> 1.3-1
 - Change summarizer to systemd service
 - Update tests for ES5
