@@ -25,7 +25,7 @@ def main():
     # Arguments to send to the remote summarizer
     parser.add_argument('--destination_exchange', dest='destination_exchange', help="Exchange to send summarized records", default="gracc.osg.summary")
     parser.add_argument('--destination_key', dest='destination_key', help="Routing key to send summarized records", default="gracc.osg.summary")
-    parser.add_argument('--type', dest='type', help="Type of summarization to retrieve", default="summary")
+    parser.add_argument('--type', dest='type', help="Type of summarization to retrieve, summary or transfer_summary.  Default: summary", default="summary")
     
     # Parse the arguments
     args = parser.parse_args()
