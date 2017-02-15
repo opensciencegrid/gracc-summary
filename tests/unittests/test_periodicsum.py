@@ -131,6 +131,23 @@ class TestPeriodicSummarizer(unittest.TestCase):
         print stats
         
         self.assertGreater(num_raw, 0)
+        
+        
+    def test_raw_transfer(self):
+        """
+        Testing the tester for raw summary data
+        """
+        # Check the raw indexes for records from the last 7 days
+        client = Elasticsearch()
+        s = Search(using=client, index='gracc.osg-transfer.raw-*') \
+        .filter('range', **{'StartTime': {'from': 'now-7d', 'to': 'now'}})
+        
+        num_raw = s.count()
+        
+        stats = client.cat.indices(index='_all')
+        print stats
+        
+        self.assertGreater(num_raw, 0)
 
         
     def test_periodic_summarizer(self):
