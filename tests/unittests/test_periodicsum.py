@@ -139,7 +139,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         """
         # Check the raw indexes for records from the last 7 days
         client = Elasticsearch()
-        s = Search(using=client, index='gracc.osg-transfer.raw-*') \
+        s = Search(using=client, index='gracc.osg-transfer.raw*') \
         .filter('range', **{'StartTime': {'from': 'now-7d', 'to': 'now'}})
         
         num_raw = s.count()
