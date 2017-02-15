@@ -26,6 +26,7 @@ class PeriodicSummarizer(object):
                 routing_key=self._config['PeriodicSummarizer']['request_key'],
                 host=self._config['AMQP']['host'],
                 vhost=self._config['AMQP']['vhost'],
+                port=self._config['AMQP']['port'],
                 username=self._config['AMQP']['username'],
                 password=self._config['AMQP']['password'])
             

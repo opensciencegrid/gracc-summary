@@ -4,6 +4,7 @@
 # Host information
 host = "localhost"
 vhost = "/"
+port = 5672
 
 # Username and password for the AMQP router
 username = "guest"
