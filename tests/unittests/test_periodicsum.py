@@ -46,7 +46,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         # Update the EndTimes
         for hit in s[:100]:
-            print hit.EndTime
+            #print hit.EndTime
             # Determine the number of days between the current EndTime and now
             try:
                 cur_endtime = dateutil.parser.parse(hit.EndTime)
@@ -87,7 +87,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         # Update the EndTimes
         for hit in s[:100]:
-            print hit.EndTime
+            #print hit.EndTime
             # Determine the number of days between the current EndTime and now
             try:
                 cur_endtime = dateutil.parser.parse(hit.EndTime)
