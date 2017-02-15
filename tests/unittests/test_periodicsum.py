@@ -164,7 +164,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
         
         # Search for the summary transfer records
         s = Search(using=client, index='gracc.osg.transfer-summary*') \
-        .filter('range', **{'EndTime': {'from': 'now-7d', 'to': 'now'}})
+        .filter('range', **{'StartTime': {'from': 'now-7d', 'to': 'now'}})
         
         num_sum = s.count()
         
