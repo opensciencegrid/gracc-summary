@@ -38,7 +38,7 @@ class TestSummarizer(unittest.TestCase):
     def test_OneDay(self):
         "Test 1 day worth of data"
         
-        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-04\" \"2016-06-05\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-21\" \"2016-06-23\"", shell=True)
         
         time.sleep(20)
         
@@ -47,7 +47,7 @@ class TestSummarizer(unittest.TestCase):
         
     def test_SevenDay(self):
         "Test 7 Days worth of data"
-        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-01\" \"2016-06-07\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-20\" \"2016-06-27\"", shell=True)
         
         time.sleep(20)
                 
