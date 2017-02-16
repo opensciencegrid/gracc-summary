@@ -1,5 +1,5 @@
 Name:           gracc-summary
-Version:        2.0.1
+Version:        3.0.0
 Release:        1%{?dist}
 Summary:        GRACC Summary Agents
 
@@ -64,6 +64,9 @@ install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 %changelog
+* Thu Feb 16 2017 Derek Weitzel <dweitzel@cse.unl.edu> 3.0.0
+- Configuration now requires a URL setting
+
 * Mon Feb 13 2017 Derek Weitzel <dweitzel@cse.unl.edu> 2.0-1
 - Adding helpful text to command line options
 
