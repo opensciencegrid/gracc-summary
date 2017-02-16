@@ -28,7 +28,7 @@ def main():
     args = parser.parse_args()
     
     # Create the client
-    client = Client(exchange=args.exchange, routing_key=args.routing_key, args.URL)
+    client = Client(exchange=args.exchange, routing_key=args.routing_key, url=args.URL)
     
     # Break the summarize period into 7 day increments, so we don't overload anything!
     # (no testing went into this decision, 7 days was picked arbitrarily)
