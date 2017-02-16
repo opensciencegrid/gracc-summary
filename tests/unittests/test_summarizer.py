@@ -38,7 +38,7 @@ class TestSummarizer(unittest.TestCase):
     def test_OneDay(self):
         "Test 1 day worth of data"
         
-        subprocess.call("graccsummarizer \"2016-06-04\" \"2016-06-05\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-21\" \"2016-06-23\"", shell=True)
         
         time.sleep(20)
         
@@ -47,7 +47,7 @@ class TestSummarizer(unittest.TestCase):
         
     def test_SevenDay(self):
         "Test 7 Days worth of data"
-        subprocess.call("graccsummarizer \"2016-06-01\" \"2016-06-07\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-20\" \"2016-06-27\"", shell=True)
         
         time.sleep(20)
                 
@@ -55,7 +55,7 @@ class TestSummarizer(unittest.TestCase):
     
     def test_ThirtyDays(self):
         "Test 30 days worth of data"
-        subprocess.call("graccsummarizer \"2016-06-01\" \"2016-07-01\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-06-01\" \"2016-07-01\"", shell=True)
         
         time.sleep(20)
                 
@@ -67,7 +67,7 @@ class TestSummarizer(unittest.TestCase):
         Test 1 year worth of data
         Takes too long to run 1 year, so just do ~3 months
         """
-        subprocess.call("graccsummarizer \"2016-05-01\" \"2016-08-01\"", shell=True)
+        subprocess.call("graccsummarizer amqp://localhost/ \"2016-05-01\" \"2016-08-01\"", shell=True)
         
         time.sleep(20)
         client = Elasticsearch()

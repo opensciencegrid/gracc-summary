@@ -24,10 +24,7 @@ class PeriodicSummarizer(object):
             client = Client(
                 exchange=self._config['PeriodicSummarizer']['request_exchange'],
                 routing_key=self._config['PeriodicSummarizer']['request_key'],
-                host=self._config['AMQP']['host'],
-                vhost=self._config['AMQP']['vhost'],
-                username=self._config['AMQP']['username'],
-                password=self._config['AMQP']['password'])
+                url=self._config['AMQP']['url'])
             
             # Get today's date, and the date 7 days ago
             end_time = datetime.today()

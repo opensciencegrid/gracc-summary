@@ -2,12 +2,7 @@
 
 
 # Host information
-host = "localhost"
-vhost = "/"
-
-# Username and password for the AMQP router
-username = "guest"
-password = "guest"
+url = "amqp://guest:guest@localhost/"
 
 # What exchange and queue to create to listen on
 listen_exchange = "gracc.osg.summary"

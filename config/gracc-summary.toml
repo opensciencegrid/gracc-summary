@@ -2,12 +2,8 @@
 
 
 # Host information
-host = "amqp.example.com"
-vhost = "vhost"
-
-# Username and password for the AMQP router
-username = "amqpusername"
-password = "amqppassword"
+# scheme://username:password@host:port/vhost
+url = "amqps://amqpusername:amqppassword@amqp.exapmle.com:5671/vhost"
 
 # What exchange and queue to create to listen on
 listen_exchange = "gracc.osg.summary"
