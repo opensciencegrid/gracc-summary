@@ -11,7 +11,7 @@ exchange = 'gracc.osg.requests'
 queue = 'gracc.osg.requests'
 
 [ElasticSearch]
-raw_index = 'gracc.osg.raw0-*'
+raw_index = 'gracc.osg.raw-*'
 raw_type = 'JobUsageRecord'
 
 transfer_type = 'Storage'

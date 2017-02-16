@@ -32,17 +32,17 @@ class TestPeriodicSummarizer(unittest.TestCase):
         utc = UTC()
         
         # Connect and query the elasticsearch database
-        client = Elasticsearch(index='gracc.osg.raw0-*')
+        client = Elasticsearch(index='gracc.osg.raw-*')
         s = Search(using=client)
         s.query("match_all")
         response = s.execute()
         to_upload = []
         
         # Get one of the raw indices' mapping, and copy it here
-        mapping = client.indices.get_mapping(index='gracc.osg.raw0-2016.07')
+        mapping = client.indices.get_mapping(index='gracc.osg.raw2-2016.07')
         #print mapping
-        client.indices.delete(index='gracc.osg.raw0-now', ignore=404)
-        client.indices.create(index='gracc.osg.raw0-now', body=mapping['gracc.osg.raw0-2016.07'])
+        client.indices.delete(index='gracc.osg.raw-now', ignore=404)
+        client.indices.create(index='gracc.osg.raw-now', body=mapping['gracc.osg.raw2-2016.07'])
         
         # Update the EndTimes
         for hit in s[:100]:
@@ -68,7 +68,7 @@ class TestPeriodicSummarizer(unittest.TestCase):
             #print "New endtime is %s" % str(hit.EndTime)
             #print "New starttime is %s" % str(hit.StartTime)
             
-            client.index(index="gracc.osg.raw0-now", doc_type='JobUsageRecord', body=hit.to_dict())
+            client.index(index="gracc.osg.raw-now", doc_type='JobUsageRecord', body=hit.to_dict())
 
             #to_upload.append(hit)
             
