@@ -69,7 +69,9 @@ popd
 
 # Start the gracc periodic summarizer after data has been imported
 systemctl start graccsumperiodic.timer
+systemctl start graccsumperiodicyearly.timer
 systemctl status graccsumperiodic.timer
+systemctl start graccsumperiodicyearly.timer
 journalctl -u graccsumperiodic.timer -n 100 --no-pager
 journalctl -u graccsumperiodic.service -n 100 --no-pager
 # systemctl list-timers --all

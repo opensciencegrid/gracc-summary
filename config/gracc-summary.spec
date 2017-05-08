@@ -47,6 +47,8 @@ install -m 0744 config/gracc-summary.toml $RPM_BUILD_ROOT/%{_sysconfdir}/graccsu
 install -d -m 0755 $RPM_BUILD_ROOT/%{_unitdir}
 install -m 0744 config/graccsumperiodic.service $RPM_BUILD_ROOT/%{_unitdir}/
 install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
+install -m 0744 config/graccsumperiodicyearly.service $RPM_BUILD_ROOT/%{_unitdir}/
+install -m 0744 config/graccsumperiodicyearly.timer $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 
@@ -57,6 +59,8 @@ install -m 0744 config/graccsumperiodic.timer $RPM_BUILD_ROOT/%{_unitdir}/
 %attr(755, root, root) %{_bindir}/*
 %{_unitdir}/graccsumperiodic.service
 %{_unitdir}/graccsumperiodic.timer
+%{_unitdir}/graccsumperiodicyearly.service
+%{_unitdir}/graccsumperiodicyearly.timer
 %config %{_sysconfdir}/graccsum/config.d/gracc-summary.toml
 
 %doc
