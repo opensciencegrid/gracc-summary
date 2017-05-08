@@ -2,7 +2,7 @@
 Description=Run graccsumperiodic every day and on boot
 
 [Timer]
-OnCalendar=1d
+OnCalendar=1day
 Persistent=true
 
 [Install]
