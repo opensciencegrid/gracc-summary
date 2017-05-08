@@ -41,7 +41,7 @@ class PeriodicSummarizer(object):
         
         
         
-    def run(self, timperiod):
+    def run(self, timeperiod):
         """
         Begin the periodic summarizer duties
         
