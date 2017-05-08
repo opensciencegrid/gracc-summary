@@ -4,7 +4,6 @@ Description=Run graccsumperiodic every day and on boot
 [Timer]
 OnCalendar=1d
 Persistent=true
-RandomizedDelaySec=2h
 
 [Install]
 WantedBy=timers.target
