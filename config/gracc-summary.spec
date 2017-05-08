@@ -1,5 +1,5 @@
 Name:           gracc-summary
-Version:        3.0.0
+Version:        4.0.0
 Release:        1%{?dist}
 Summary:        GRACC Summary Agents
 
@@ -68,6 +68,9 @@ install -m 0744 config/graccsumperiodicyearly.timer $RPM_BUILD_ROOT/%{_unitdir}/
 
 
 %changelog
+* Mon May 08 2017 Derek Weitzel <dweitzel@cse.unl.edu> 4.0.0
+- Add configuration for yearly re-summarize every night
+
 * Thu Feb 16 2017 Derek Weitzel <dweitzel@cse.unl.edu> 3.0.0
 - Configuration now requires a URL setting
 
