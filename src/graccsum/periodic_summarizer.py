@@ -15,7 +15,7 @@ class PeriodicSummarizer(object):
             
         logging.basicConfig(level=logging.DEBUG)
         
-    def runRules(self, restrict_type = None):
+    def runRules(self, timeperiod, restrict_type = None):
         
         for summary_name in self._config['Summary']:
             cur_type = self._config['Summary'][summary_name]
@@ -28,35 +28,40 @@ class PeriodicSummarizer(object):
             
             # Get today's date, and the date 7 days ago
             end_time = datetime.today()
-            start_time = end_time - timedelta(days=7)
+            start_time = end_time - timedelta(days=timeperiod)
             
-            logging.debug("Starting query to remote requster")
-            client.query(start_time, end_time, cur_type['summary_type'], 
-                destination_exchange=cur_type['destination_exchange'], 
-                destination_key=cur_type['destination_key'])
+            while (start_time < end_time):
+                tmp_to_date = min(start_time + timedelta(days=7), end_time)
+                print "Summarizing %s to %s" % (start_time.isoformat(), tmp_to_date.isoformat())
+                client.query(start_time, tmp_to_date, cur_type['summary_type'], destination_exchange=cur_type['destination_exchange'], destination_key=cur_type['destination_key'])
+                
+                # Update the from date
+                from_date = tmp_to_date
+            
         
         
         
-    def run(self):
+    def run(self, timeperiod):
         """
         Begin the periodic summarizer duties
         
+        :param int timeperiod: The number of days to summarize in the past, ending on the current day.
         """
         
-        self.runRules()
+        self.runRules(timeperiod)
     
     
 
 def main():
     # Parse arguments
     parser = argparse.ArgumentParser(description="GRACC Periodic Summary Agent")
-    parser.add_argument("-c", "--configuration", help="Configuration file location",
-                        default="/etc/graccsum/config.toml", dest='config')
+    parser.add_argument("-c", "--configuration", help="Configuration file location", default="/etc/graccsum/config.toml", dest='config')                
+    parser.add_argument("-t", "--timeperiod", help="Time Period in days to summarize, ending on the current day", default="7", dest='timeperiod', type=int)
     args = parser.parse_args()
     
     
     # Create and run the OverMind
     summary_agent = PeriodicSummarizer(args.config)
-    summary_agent.run()
+    summary_agent.run(args.timeperiod)
 
 
