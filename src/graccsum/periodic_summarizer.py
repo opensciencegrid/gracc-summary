@@ -31,7 +31,7 @@ class PeriodicSummarizer(object):
             start_time = end_time - timedelta(days=timeperiod)
             
             while (start_time < end_time):
-                tmp_to_date = min(start_time + datetime.timedelta(days=7), end_time)
+                tmp_to_date = min(start_time + timedelta(days=7), end_time)
                 print "Summarizing %s to %s" % (start_time.isoformat(), tmp_to_date.isoformat())
                 client.query(start_time, tmp_to_date, cur_type['summary_type'], destination_exchange=cur_type['destination_exchange'], destination_key=cur_type['destination_key'])
                 
