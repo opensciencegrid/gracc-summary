@@ -36,7 +36,7 @@ class PeriodicSummarizer(object):
                 client.query(start_time, tmp_to_date, cur_type['summary_type'], destination_exchange=cur_type['destination_exchange'], destination_key=cur_type['destination_key'])
                 
                 # Update the from date
-                start_date = tmp_to_date
+                start_time = tmp_to_date
             
         
         
