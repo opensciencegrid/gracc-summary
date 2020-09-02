@@ -1,7 +1,7 @@
 elasticsearch
+graccreq@git+https://github.com/opensciencegrid/gracc-request.git
 pika
 python-dateutil
 six
 toml
 urllib3
-wsgiref
