@@ -1,0 +1,16 @@
+version: '3'
+services:
+  graccsumperiodic:
+        #image: opensciencegrid/gracc-summary
+        build: .
+        volumes:
+        - ./gracc-summary.toml:/etc/graccsum/config.toml
+        command: /usr/local/bin/graccsumperiodic
+        network_mode: host
+  graccsumperiodicyearly:
+        #image: opensciencegrid/gracc-summary
+        build: .
+        volumes:
+        - ./gracc-summary.toml:/etc/graccsum/config.toml
+        command: /usr/local/bin/graccsumperiodic -t 365
+        network_mode: host
