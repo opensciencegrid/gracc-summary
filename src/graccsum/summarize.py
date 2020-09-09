@@ -37,7 +37,7 @@ def main():
     
     while (from_date < to_date):
         tmp_to_date = min(from_date + datetime.timedelta(days=7), to_date)
-        print "Summarizing %s to %s" % (from_date.isoformat(), tmp_to_date.isoformat())
+        print("Summarizing %s to %s" % (from_date.isoformat(), tmp_to_date.isoformat()))
         client.query(from_date, tmp_to_date, args.type, destination_exchange=args.destination_exchange, destination_key=args.destination_key)
         
         # Update the from date

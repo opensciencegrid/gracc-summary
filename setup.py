@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
 import os
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 setup(name='graccsum',
       version='4.2.0',
@@ -10,13 +12,7 @@ setup(name='graccsum',
       url='https://opensciencegrid.github.io/gracc',
       package_dir={'': 'src'},
       packages=['graccsum'],
-      install_requires=['elasticsearch',
-      'pika',
-      'six',
-      'toml',
-      'urllib3',
-      'wsgiref'
-      ],
+      install_requires=requirements,
       entry_points= {
             'console_scripts': [
                   'graccsumperiodic = graccsum.periodic_summarizer:main',
